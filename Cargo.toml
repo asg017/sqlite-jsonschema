@@ -1,14 +1,12 @@
 [package]
-name = "sqlite-rust-starter"
-version = "0.1.0"
+name = "sqlite-jsonschema"
+version = "0.0.0"
 edition = "2021"
 
 [dependencies]
-sqlite3-loadable = {path="../rust-sqlite-exts/sqlite3-loadable"}
-sqlite3ext-sys = {path="../rust-sqlite-exts/sqlite3ext-sys"}
+sqlite-loadable = "0.0.5"
 jsonschema = {version="0.16.1", default-features = false}
 serde_json = "1.0.87"
 
 [lib]
-crate-type=["rlib", "cdylib"]
-name = "jsonschema0"
+crate-type=["lib", "staticlib", "cdylib"]

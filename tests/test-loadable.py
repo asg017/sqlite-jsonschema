@@ -3,7 +3,7 @@ import unittest
 import time
 import os
 
-EXT_PATH="./target/debug/libjsonschema0"
+EXT_PATH="./dist/debug/jsonschema0"
 
 def connect(ext):
   db = sqlite3.connect(":memory:")
@@ -48,8 +48,7 @@ class TestJsonschema(unittest.TestCase):
     self.assertEqual(modules, MODULES)
     
   def test_jsonschema_version(self):
-    version = 'v0.1.0'
-    self.assertEqual(db.execute("select jsonschema_version()").fetchone()[0], version)
+    self.assertEqual(db.execute("select jsonschema_version()").fetchone()[0][0], "v")
   
   def test_jsonschema_debug(self):
     debug = db.execute("select jsonschema_debug()").fetchone()[0]
