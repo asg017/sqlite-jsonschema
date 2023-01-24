@@ -9,7 +9,7 @@ pub fn jsonschema_version(
     context: *mut sqlite3_context,
     _values: &[*mut sqlite3_value],
 ) -> Result<()> {
-    api::result_text(context, &format!("v{}", env!("CARGO_PKG_VERSION")))?;
+    api::result_text(context, format!("v{}", env!("CARGO_PKG_VERSION")))?;
     Ok(())
 }
 
@@ -19,7 +19,7 @@ pub fn jsonschema_debug(
 ) -> Result<()> {
     api::result_text(
         context,
-        &format!(
+        format!(
             "Version: v{}
 Source: {}
 ",

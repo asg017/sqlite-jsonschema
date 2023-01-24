@@ -59,6 +59,19 @@ class TestJsonschema(unittest.TestCase):
     self.assertEqual(jsonschema_matches('{"maxLength": 5}', '"aaaaa"'), 1)
     self.assertEqual(jsonschema_matches('{"maxLength": 5}', '"aaaaaa"'), 0)
 
+    matches_all = lambda schema, data: execute_all("select value, jsonschema_matches(?, json_quote(value)) as result from json_each(?)", [schema, data])
+
+    self.assertEqual(
+      matches_all('{"maxLength": 3}', '["a", "bb", "ccc", "dddd"]'),
+      [
+        {"value": "a", "result": 1},
+        {"value": "bb", "result": 1},
+        {"value": "ccc", "result": 1},
+        {"value": "dddd", "result": 0},
+      ]
+    )
+
+
   
 class TestCoverage(unittest.TestCase):                                      
   def test_coverage(self):                                                      

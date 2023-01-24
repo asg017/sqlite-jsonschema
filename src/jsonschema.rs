@@ -14,8 +14,8 @@ pub fn jsonschema_matches(
             .get(1)
             .ok_or_else(|| Error::new_message("expected 2nd argument as contents"))?,
     )?;
-    let instance =
-        serde_json::from_str(instance).map_err(|_| Error::new_message("Invalid JSON"))?;
+    let instance = serde_json::from_str(instance)
+        .map_err(|e| Error::new_message(format!("Invalid JSON: {}", e).as_str()))?;
     api::result_bool(context, schema.is_valid(&instance));
     cleanup_regex_value_cached(context, schema, input_type);
     Ok(())
@@ -54,7 +54,9 @@ pub fn jsonschema_from_value_or_cache(
     }
 }
 
-unsafe extern "C" fn cleanup(_arg1: *mut c_void) {}
+unsafe extern "C" fn cleanup(p: *mut c_void) {
+    drop(Box::from_raw(p.cast::<*mut JSONSchema>()))
+}
 
 pub fn cleanup_regex_value_cached(
     context: *mut sqlite3_context,
