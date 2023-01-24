@@ -23,12 +23,12 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: make loadable-release
+      - run: make loadable
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-jsonschema-ubuntu
-          path: dist/release/jsonschema0.so
+          path: dist/debug/jsonschema0.so
   build-macos:
     if: false
     name: Build macos-latest
@@ -114,6 +114,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: Download workflow artifacts
         uses: actions/download-artifact@v2
+      - run: npm install archiver
       - uses: actions/github-script@v6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
