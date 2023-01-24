@@ -30,6 +30,7 @@ jobs:
           name: sqlite-jsonschema-ubuntu
           path: dist/release/jsonschema0.so
   build-macos:
+    if: false
     name: Build macos-latest
     runs-on: macos-latest
     steps:
@@ -53,6 +54,7 @@ jobs:
           name: sqlite-jsonschema-macos
           path: dist/release/jsonschema0.dylib
   build-macos-arm:
+    if: false
     name: Build macos-latest with arm
     runs-on: macos-latest
     steps:
@@ -78,6 +80,7 @@ jobs:
           name: sqlite-jsonschema-macos-arm
           path: dist/debug/jsonschema0.dylib
   build-windows:
+    if: false
     name: Build windows-latest
     runs-on: windows-latest
     steps:
@@ -102,7 +105,8 @@ jobs:
           path: dist/release/jsonschema0.dll
   upload:
     name: upload
-    needs: [build-macos, build-macos-arm, build-ubuntu, build-windows]
+    #needs: [build-macos, build-macos-arm, build-ubuntu, build-windows]
+    needs: [build-ubuntu]
     permissions:
       contents: write
     runs-on: ubuntu-latest
