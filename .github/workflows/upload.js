@@ -82,6 +82,7 @@ module.exports = async ({ github, context }) => {
       };
     })
   );
+  console.log("assets length: ", extension_assets.length);
   let checksum = {
     extensions: Object.fromEntries(
       extension_assets.map((d) => [
@@ -94,6 +95,7 @@ module.exports = async ({ github, context }) => {
       ])
     ),
   };
+  console.log("checksum", checksum);
 
   await github.rest.repos.uploadReleaseAsset({
     owner,
