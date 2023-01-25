@@ -1,30 +1,34 @@
 const fs = require("fs").promises;
 const crypto = require("crypto");
-const archiver = require("archiver");
-const stream = require("stream");
+const zlib = require("zlib");
+const tar = require("tar-fs");
 
 function targz(files) {
   return new Promise((resolve, reject) => {
-    const output = new stream.PassThrough();
-    const archive = archiver("tar", {
-      gzip: true,
-      gzipOptions: {
-        level: 1,
-      },
-    });
+    console.log("targz files: ", files[0].name, files[0]);
 
-    output.on("close", () => {});
+    const tarStream = tar.pack();
 
-    archive.pipe(output);
     for (const file of files) {
-      archive.append(file.data, { name: file.name });
+      tarStream.entry({ name: file.name }, file.data);
     }
 
-    archive.finalize();
+    tarStream.finalize();
 
-    archive.on("finish", () => {
-      resolve(output.read());
-    });
+    const gzip = zlib.createGzip();
+
+    const chunks = [];
+    tarStream
+      .pipe(gzip)
+      .on("data", (chunk) => {
+        chunks.push(chunk);
+      })
+      .on("end", () => {
+        const buffer = Buffer.concat(chunks);
+        console.log(buffer);
+        resolve(buffer);
+      })
+      .on("error", reject);
   });
 }
 
@@ -39,30 +43,34 @@ module.exports = async ({ github, context }) => {
     repo,
     tag: process.env.GITHUB_REF.replace("refs/tags/", ""),
   });
-
+  console.log("release id: ", release.data.id);
+  const VERSION = process.env.GITHUB_REF_NAME;
   const release_id = release.data.id;
 
   const compiled_extensions = [
     {
       name: "jsonschema0.so",
       path: "sqlite-jsonschema-ubuntu/jsonschema0.so",
-      asset_name: "sqlite-jsonschema-vTODO-ubuntu-x86_64.tar.gz",
+      asset_name: `sqlite-jsonschema-${VERSION}-ubuntu-x86_64.tar.gz`,
     },
-    /*{
+    {
       name: "jsonschema0.dylib",
       path: "sqlite-jsonschema-macos/jsonschema0.dylib",
+      asset_name: `sqlite-jsonschema-${VERSION}-macos-x86_64.tar.gz`,
     },
     {
       name: "jsonschema0.dylib",
       path: "sqlite-jsonschema-macos-arm/jsonschema0.dylib",
+      asset_name: `sqlite-jsonschema-${VERSION}-macos-arm64.tar.gz`,
     },
     {
       name: "jsonschema0.dll",
       path: "sqlite-jsonschema-windows/jsonschema0.dll",
-    },*/
+      asset_name: `sqlite-jsonschema-${VERSION}-windows-x86_64.tar.gz`,
+    },
   ];
 
-  let extension_assets = await Promise.all(
+  const extension_assets = await Promise.all(
     compiled_extensions.map(async (d) => {
       const extensionContents = await fs.readFile(d.path);
       const ext_sha256 = crypto
@@ -83,7 +91,7 @@ module.exports = async ({ github, context }) => {
     })
   );
   console.log("assets length: ", extension_assets.length);
-  let checksum = {
+  const checksum = {
     extensions: Object.fromEntries(
       extension_assets.map((d) => [
         d.asset_name,

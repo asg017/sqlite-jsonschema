@@ -47,16 +47,16 @@ $(TARGET_LOADABLE): $(prefix) $(shell find . -type f -name '*.rs')
 	cp $(BUILT_LOCATION) $@
 
 $(TARGET_STATIC): $(prefix) $(shell find . -type f -name '*.rs')
-	cargo build 
+	cargo build $(CARGO_TARGET)
 	cp target/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.a $@
 
 
 $(TARGET_LOADABLE_RELEASE): $(prefix) $(shell find . -type f -name '*.rs')
-	cargo build --release 
+	cargo build --release $(CARGO_TARGET)
 	cp target/release/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION) $@
 
 $(TARGET_STATIC_RELEASE): $(prefix) $(shell find . -type f -name '*.rs')
-	cargo build 
+	cargo build $(CARGO_TARGET)
 	cp target/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.a $@
 
 sqlite-jsonschema.h: cbindgen.toml

@@ -23,14 +23,13 @@ jobs:
       - uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-      - run: make loadable
+      - run: make loadable-release
       - name: Upload artifacts
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-jsonschema-ubuntu
           path: dist/debug/jsonschema0.so
   build-macos:
-    if: false
     name: Build macos-latest
     runs-on: macos-latest
     steps:
@@ -54,7 +53,6 @@ jobs:
           name: sqlite-jsonschema-macos
           path: dist/release/jsonschema0.dylib
   build-macos-arm:
-    if: false
     name: Build macos-latest with arm
     runs-on: macos-latest
     steps:
@@ -72,7 +70,7 @@ jobs:
         with:
           toolchain: stable
       - run: rustup target add aarch64-apple-darwin
-      - run: make target=aarch64-apple-darwin loadable
+      - run: make target=aarch64-apple-darwin loadable-release
       #- run: make test
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
@@ -80,7 +78,6 @@ jobs:
           name: sqlite-jsonschema-macos-arm
           path: dist/debug/jsonschema0.dylib
   build-windows:
-    if: false
     name: Build windows-latest
     runs-on: windows-latest
     steps:
@@ -105,8 +102,7 @@ jobs:
           path: dist/release/jsonschema0.dll
   upload:
     name: upload
-    #needs: [build-macos, build-macos-arm, build-ubuntu, build-windows]
-    needs: [build-ubuntu]
+    needs: [build-macos, build-macos-arm, build-ubuntu, build-windows]
     permissions:
       contents: write
     runs-on: ubuntu-latest
