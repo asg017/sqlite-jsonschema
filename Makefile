@@ -32,9 +32,11 @@ TARGET_STATIC_RELEASE=$(prefix)/release/jsonschema0.a
 ifdef target
 CARGO_TARGET=--target=$(target)
 BUILT_LOCATION=target/$(target)/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
+BUILT_LOCATION_RELEASE=target/$(target)/release/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
 else 
 CARGO_TARGET=
 BUILT_LOCATION=target/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
+BUILT_LOCATION_RELEASE=target/release/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
 endif
 
 
@@ -46,18 +48,9 @@ $(TARGET_LOADABLE): $(prefix) $(shell find . -type f -name '*.rs')
 	cargo build $(CARGO_TARGET)
 	cp $(BUILT_LOCATION) $@
 
-$(TARGET_STATIC): $(prefix) $(shell find . -type f -name '*.rs')
-	cargo build $(CARGO_TARGET)
-	cp target/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.a $@
-
-
 $(TARGET_LOADABLE_RELEASE): $(prefix) $(shell find . -type f -name '*.rs')
 	cargo build --release $(CARGO_TARGET)
-	cp target/release/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION) $@
-
-$(TARGET_STATIC_RELEASE): $(prefix) $(shell find . -type f -name '*.rs')
-	cargo build $(CARGO_TARGET)
-	cp target/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.a $@
+	cp $(BUILT_LOCATION_RELEASE) $@
 
 sqlite-jsonschema.h: cbindgen.toml
 	rustup run nightly cbindgen  --config $< -o $@
