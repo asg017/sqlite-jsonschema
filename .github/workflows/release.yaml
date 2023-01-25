@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: sqlite-jsonschema-ubuntu
-          path: dist/debug/jsonschema0.so
+          path: dist/release/jsonschema0.so
   build-macos:
     name: Build macos-latest
     runs-on: macos-latest
@@ -76,7 +76,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: sqlite-jsonschema-macos-arm
-          path: dist/debug/jsonschema0.dylib
+          path: dist/release/jsonschema0.dylib
   build-windows:
     name: Build windows-latest
     runs-on: windows-latest
