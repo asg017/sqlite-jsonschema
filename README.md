@@ -50,6 +50,24 @@ insert into students(data)
 
 ```
 
+Find all the values in a column that don't match a JSON Schema.
+
+```sql
+select
+  rowid,
+  jsonschema_matches(
+    '{
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    }',
+    foo
+  ) as valid
+from bar
+where not valid;
+```
+
 ## Installing
 
 The [Releases page](https://github.com/asg017/sqlite-jsonschema/releases) contains pre-built binaries for Linux x86_64, MacOS, and Windows.
