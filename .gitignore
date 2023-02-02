@@ -1,2 +1,6 @@
 target/
 dist/
+*.dylib
+*.so
+*.dll
+
