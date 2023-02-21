@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 
 ifeq ($(shell uname -s),Darwin)
 CONFIG_DARWIN=y
@@ -94,6 +95,20 @@ datasette-release: $(TARGET_WHEELS_RELEASE) python/datasette_sqlite_jsonschema/s
 	rm $(TARGET_WHEELS_RELEASE)/datasette* || true
 	pip3 wheel python/datasette_sqlite_jsonschema/ --no-deps -w $(TARGET_WHEELS_RELEASE)
 
+Cargo.toml: VERSION
+	cargo set-version `cat VERSION`
+
+python/sqlite_jsonschema/sqlite_jsonschema/version.py: VERSION
+	printf '__version__ = "%s"\n__version_info__ = tuple(__version__.split("."))\n' `cat VERSION` > $@
+
+python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py: VERSION
+	printf '__version__ = "%s"\n__version_info__ = tuple(__version__.split("."))\n' `cat VERSION` > $@
+
+version:
+	make Cargo.toml
+	make python/sqlite_jsonschema/sqlite_jsonschema/version.py
+	make python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py
+
 format:
 	cargo fmt
 
@@ -131,4 +146,5 @@ test:
 	python python-release \
 	datasette datasette-release \
 	static static-release \
-	debug release
+	debug release \
+	format version
