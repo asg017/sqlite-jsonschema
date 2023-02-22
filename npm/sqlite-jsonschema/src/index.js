@@ -22,7 +22,7 @@ function extensionSuffix(platform) {
 }
 function platformPackageName(platform, arch) {
   const os = platform === "win32" ? "windows" : platform;
-  return `sqlite-jsonschema-${ps}-${arch}`;
+  return `sqlite-jsonschema-${os}-${arch}`;
 }
 
 export function getLoadablePath() {
