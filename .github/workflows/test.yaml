@@ -77,7 +77,6 @@ jobs:
         working-directory: npm/sqlite-jsonschema
       - run: make test-npm
   build-macos-extension:
-    if: false
     name: Building macos-latest
     runs-on: macos-latest
     steps:
@@ -129,14 +128,25 @@ jobs:
           path: dist/debug/
       - uses: actions/download-artifact@v3
         with:
+          name: sqlite-jsonschema-macos
+          path: npm/sqlite-jsonschema-macos-x64/lib
+      - uses: actions/download-artifact@v3
+        with:
           name: sqlite-jsonschema-macos-wheels
           path: dist/debug/
       - run: brew install python
       - run: /usr/local/opt/python@3/libexec/bin/pip install --find-links dist/debug/ sqlite_jsonschema
       - run: make test-loadable python=/usr/local/opt/python@3/libexec/bin/python
       - run: make test-python python=/usr/local/opt/python@3/libexec/bin/python
+      # for test-npm
+      - uses: actions/setup-node@v3
+        with:
+          cache: "npm"
+          cache-dependency-path: npm/sqlite-jsonschema/package-lock.json
+      - run: npm ci
+        working-directory: npm/sqlite-jsonschema
+      - run: make test-npm
   build-macos-arm-extension:
-    if: false
     name: Building macos arm extension
     runs-on: macos-latest
     steps:
@@ -179,7 +189,6 @@ jobs:
           name: sqlite-jsonschema-macos-arm-wheels
           path: dist/debug/wheels/*.whl
   build-windows-extension:
-    if: false
     name: Building windows extension
     runs-on: windows-latest
     steps:
@@ -231,11 +240,23 @@ jobs:
           path: dist/debug/
       - uses: actions/download-artifact@v3
         with:
+          name: sqlite-jsonschema-windows
+          path: npm/sqlite-jsonschema-windows-x64/lib
+      - uses: actions/download-artifact@v3
+        with:
           name: sqlite-jsonschema-windows-wheels
           path: dist/debug/
       - run: pip install --find-links dist/debug/ sqlite_jsonschema
       - run: make test-loadable
       - run: make test-python
+      # for test-npm
+      - uses: actions/setup-node@v3
+        with:
+          cache: "npm"
+          cache-dependency-path: npm/sqlite-jsonschema/package-lock.json
+      - run: npm ci
+        working-directory: npm/sqlite-jsonschema
+      - run: make test-npm
   upload_test_pypi:
     if: ${{ contains(github.event.head_commit.message, '@test_pypi') }}
     needs: [test-ubuntu, test-macos, test-windows, build-macos-arm-python]
