@@ -85,7 +85,7 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ${{ env.DENO_DIR }}
-          key: ${{ hashFiles('deno/deno.lock') }}
+          key: ${{ runner.os }}-${{ hashFiles('deno/deno.lock') }}
       - run: DENO_SQLITE_JSONSCHEMA_PATH=$PWD/dist/debug/jsonschema0.so make test-deno
   build-macos-extension:
     name: Building macos-latest
@@ -154,9 +154,19 @@ jobs:
         with:
           cache: "npm"
           cache-dependency-path: npm/sqlite-jsonschema/package-lock.json
-      - run: npm ci
+      - run: npm install
         working-directory: npm/sqlite-jsonschema
       - run: make test-npm
+      # for test-deno
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Cache Deno dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.DENO_DIR }}
+          key: ${{ runner.os }}-${{ hashFiles('deno/deno.lock') }}
+      - run: DENO_SQLITE_JSONSCHEMA_PATH=$PWD/dist/debug/jsonschema0.dylib make test-deno
   build-macos-arm-extension:
     name: Building macos arm extension
     runs-on: macos-latest
@@ -265,9 +275,19 @@ jobs:
         with:
           cache: "npm"
           cache-dependency-path: npm/sqlite-jsonschema/package-lock.json
-      - run: npm ci
+      - run: npm install
         working-directory: npm/sqlite-jsonschema
       - run: make test-npm
+      # for test-deno
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Cache Deno dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.DENO_DIR }}
+          key: ${{ runner.os }}-${{ hashFiles('deno/deno.lock') }}
+      - run: DENO_SQLITE_JSONSCHEMA_PATH=$PWD/dist/debug/jsonschema0.dll make test-deno
   upload_test_pypi:
     if: ${{ contains(github.event.head_commit.message, '@test_pypi') }}
     needs: [test-ubuntu, test-macos, test-windows, build-macos-arm-python]

@@ -128,3 +128,6 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# not needed for libraries, right? running into some issues in ci with this, so gonna yeet
+package-lock.json

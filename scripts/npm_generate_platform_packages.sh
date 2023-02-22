@@ -26,14 +26,11 @@ generate () {
   envsubst < npm/platform-package.README.md.tmpl > npm/$PACKAGE_NAME/README.md
   
   touch npm/$PACKAGE_NAME/lib/.gitkeep
-
-  (cd npm/$PACKAGE_NAME; npm install --package-lock-only --quiet)
   
   echo "✅ generated npm/$PACKAGE_NAME"
 }
 
 envsubst < npm/$PACKAGE_NAME_BASE/package.json.tmpl > npm/$PACKAGE_NAME_BASE/package.json
-(cd npm/$PACKAGE_NAME_BASE; npm install --package-lock-only --quiet)
 echo "✅ generated npm/$PACKAGE_NAME_BASE"
 
 generate darwin x64 
