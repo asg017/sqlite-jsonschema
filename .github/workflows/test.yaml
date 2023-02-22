@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - npm
 permissions:
   contents: read
 jobs:
