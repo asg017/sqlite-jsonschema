@@ -98,6 +98,9 @@ datasette-release: $(TARGET_WHEELS_RELEASE) python/datasette_sqlite_jsonschema/s
 npm: VERSION npm/platform-package.README.md.tmpl npm/platform-package.package.json.tmpl npm/sqlite-jsonschema/package.json.tmpl scripts/npm_generate_platform_packages.sh
 	scripts/npm_generate_platform_packages.sh
 
+deno: VERSION deno/deno.json.tmpl
+	scripts/deno_generate_package.sh
+
 Cargo.toml: VERSION
 	cargo set-version `cat VERSION`
 
@@ -143,6 +146,9 @@ test-python:
 test-npm:
 	node npm/sqlite-jsonschema/test.js
 
+test-deno:
+	deno task --config deno/deno.json test
+
 test:
 	make test-loadable
 	make test-python
@@ -155,4 +161,5 @@ test:
 	datasette datasette-release \
 	static static-release \
 	debug release \
-	format version
+	format version \
+	deno npm
