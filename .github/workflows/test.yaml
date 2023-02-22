@@ -131,6 +131,8 @@ jobs:
   test-macos:
     runs-on: macos-latest
     needs: [build-macos-extension, build-macos-python]
+    env:
+      DENO_DIR: deno_cache
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
@@ -153,7 +155,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: "npm"
-          cache-dependency-path: npm/sqlite-jsonschema/package-lock.json
+          cache-dependency-path: npm/sqlite-jsonschema/package.json
       - run: npm install
         working-directory: npm/sqlite-jsonschema
       - run: make test-npm
@@ -253,6 +255,8 @@ jobs:
   test-windows:
     runs-on: windows-latest
     needs: [build-windows-extension, build-windows-python]
+    env:
+      DENO_DIR: deno_cache
     steps:
       - uses: actions/checkout@v3
       - uses: actions/download-artifact@v3
@@ -274,7 +278,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: "npm"
-          cache-dependency-path: npm/sqlite-jsonschema/package-lock.json
+          cache-dependency-path: npm/sqlite-jsonschema/package.json
       - run: npm install
         working-directory: npm/sqlite-jsonschema
       - run: make test-npm
