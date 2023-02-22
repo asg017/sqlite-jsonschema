@@ -115,6 +115,7 @@ version:
 	make python/sqlite_jsonschema/sqlite_jsonschema/version.py
 	make python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py
 	make npm
+	make deno
 
 format:
 	cargo fmt
