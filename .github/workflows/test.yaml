@@ -86,7 +86,9 @@ jobs:
         with:
           path: ${{ env.DENO_DIR }}
           key: ${{ runner.os }}-${{ hashFiles('deno/deno.lock') }}
-      - run: DENO_SQLITE_JSONSCHEMA_PATH=$PWD/dist/debug/jsonschema0.so make test-deno
+      - run: make test-deno
+        env:
+          DENO_SQLITE_JSONSCHEMA_PATH: ./dist/debug/jsonschema0.so
   build-macos-extension:
     name: Building macos-latest
     runs-on: macos-latest
@@ -168,7 +170,9 @@ jobs:
         with:
           path: ${{ env.DENO_DIR }}
           key: ${{ runner.os }}-${{ hashFiles('deno/deno.lock') }}
-      - run: DENO_SQLITE_JSONSCHEMA_PATH=$PWD/dist/debug/jsonschema0.dylib make test-deno
+      - run: make test-deno
+        env:
+          DENO_SQLITE_JSONSCHEMA_PATH: ./dist/debug/jsonschema0.dylib
   build-macos-arm-extension:
     name: Building macos arm extension
     runs-on: macos-latest
@@ -291,7 +295,9 @@ jobs:
         with:
           path: ${{ env.DENO_DIR }}
           key: ${{ runner.os }}-${{ hashFiles('deno/deno.lock') }}
-      - run: DENO_SQLITE_JSONSCHEMA_PATH=$PWD/dist/debug/jsonschema0.dll make test-deno
+      - run: make test-deno
+        env:
+          DENO_SQLITE_JSONSCHEMA_PATH: ./dist/debug/jsonschema0.dll
   upload_test_pypi:
     if: ${{ contains(github.event.head_commit.message, '@test_pypi') }}
     needs: [test-ubuntu, test-macos, test-windows, build-macos-arm-python]
