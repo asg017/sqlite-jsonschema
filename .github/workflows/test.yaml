@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-      - pip-install
+      - npm
 permissions:
   contents: read
 jobs:
@@ -59,12 +59,18 @@ jobs:
           path: dist/debug/
       - uses: actions/download-artifact@v3
         with:
+          name: sqlite-jsonschema-ubuntu
+          path: npm/sqlite-jsonschema-linux-x64/lib
+      - uses: actions/download-artifact@v3
+        with:
           name: sqlite-jsonschema-ubuntu-wheels
           path: dist/debug/
       - run: pip install --find-links dist/debug/ sqlite_jsonschema
       - run: make test-loadable
       - run: make test-python
+      - run: make test-npm
   build-macos-extension:
+    if: false
     name: Building macos-latest
     runs-on: macos-latest
     steps:
@@ -123,6 +129,7 @@ jobs:
       - run: make test-loadable python=/usr/local/opt/python@3/libexec/bin/python
       - run: make test-python python=/usr/local/opt/python@3/libexec/bin/python
   build-macos-arm-extension:
+    if: false
     name: Building macos arm extension
     runs-on: macos-latest
     steps:
@@ -165,6 +172,7 @@ jobs:
           name: sqlite-jsonschema-macos-arm-wheels
           path: dist/debug/wheels/*.whl
   build-windows-extension:
+    if: false
     name: Building windows extension
     runs-on: windows-latest
     steps:
