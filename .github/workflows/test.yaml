@@ -68,6 +68,8 @@ jobs:
       - run: pip install --find-links dist/debug/ sqlite_jsonschema
       - run: make test-loadable
       - run: make test-python
+      - run: npm install
+        working-directory: npm/sqlite-jsonschema
       - run: make test-npm
   build-macos-extension:
     if: false
