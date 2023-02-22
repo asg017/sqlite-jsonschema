@@ -224,3 +224,46 @@ jobs:
         with:
           password: ${{ secrets.PYPI_API_TOKEN }}
           skip_existing: true
+  upload-npm:
+    needs:
+      [
+        build-ubuntu-python,
+        build-macos-python,
+        build-macos-arm-python,
+        build-windows-python,
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Download workflow artifacts
+        uses: actions/download-artifact@v2
+      - run: |
+          cp sqlite-jsonschema-ubuntu/jsonschema0.so npm/sqlite-jsonschema-linux-x64/lib/jsonschema0.so
+          cp sqlite-jsonschema-macos/jsonschema0.dylib npm/sqlite-jsonschema-darwin-x64/lib/jsonschema0.dylib
+          cp sqlite-jsonschema-macos-arm/jsonschema0.dylib npm/sqlite-jsonschema-darwin-arm64/lib/jsonschema0.dylib
+          cp sqlite-jsonschema-windows/jsonschema0.dll npm/sqlite-jsonschema-windows-x64/lib/jsonschema0.dll
+      - name: Publish NPM sqlite-jsonschema-linux-x64
+        working-directory: npm/sqlite-jsonschema-linux-x64
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish NPM sqlite-jsonschema-darwin-x64
+        working-directory: npm/sqlite-jsonschema-darwin-x64
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish NPM sqlite-jsonschema-darwin-arm64
+        working-directory: npm/sqlite-jsonschema-darwin-arm64
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish NPM sqlite-jsonschema-windows-x64
+        working-directory: npm/sqlite-jsonschema-windows-x64
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish NPM sqlite-jsonschema
+        working-directory: npm/sqlite-jsonschema
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
