@@ -111,6 +111,7 @@ version:
 	make Cargo.toml
 	make python/sqlite_jsonschema/sqlite_jsonschema/version.py
 	make python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py
+	make npm
 
 format:
 	cargo fmt
