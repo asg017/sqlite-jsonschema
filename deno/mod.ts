@@ -40,6 +40,9 @@ try {
   throw error;
 }
 
+/**
+ * Returns the full path to the compiled sqlite-jsonschema extension. Meant to be passed into `loadExtension()` in `x/sqlite3`.
+ */
 export function getLoadablePath(): string {
   return path;
 }
