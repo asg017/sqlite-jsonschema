@@ -73,8 +73,8 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           cache: "npm"
-          cache-dependency-path: npm/sqlite-jsonschema/package-lock.json
-      - run: npm ci
+          cache-dependency-path: npm/sqlite-jsonschema/package.json
+      - run: npm install
         working-directory: npm/sqlite-jsonschema
       - run: make test-npm
       # for test-deno
