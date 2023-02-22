@@ -129,7 +129,7 @@ jobs:
       - uses: actions/download-artifact@v3
         with:
           name: sqlite-jsonschema-macos
-          path: npm/sqlite-jsonschema-macos-x64/lib
+          path: npm/sqlite-jsonschema-darwin-x64/lib
       - uses: actions/download-artifact@v3
         with:
           name: sqlite-jsonschema-macos-wheels
