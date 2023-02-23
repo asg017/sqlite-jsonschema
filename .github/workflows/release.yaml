@@ -135,7 +135,7 @@ jobs:
         with:
           name: sqlite-jsonschema-windows-wheels
           path: dist/release/wheels/*.whl
-  upload-release-assets-extensions:
+  upload-extensions:
     name: Upload release assets
     needs:
       [
@@ -158,7 +158,7 @@ jobs:
           script: |
             const script = require('.github/workflows/upload.js')
             await script({github, context})
-  upload-release-assets-deno:
+  upload-deno:
     name: Upload Deno release assets
     needs:
       [
@@ -180,43 +180,13 @@ jobs:
           script: |
             const script = require('.github/workflows/upload-deno-assets.js')
             await script({github, context})
-  upload-pypi:
-    needs:
-      [
-        build-ubuntu-python,
-        build-macos-python,
-        build-macos-arm-python,
-        build-windows-python,
-      ]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/download-artifact@v3
-        with:
-          name: sqlite-jsonschema-windows-wheels
-          path: dist
-      - uses: actions/download-artifact@v3
-        with:
-          name: sqlite-jsonschema-ubuntu-wheels
-          path: dist
-      - uses: actions/download-artifact@v3
-        with:
-          name: sqlite-jsonschema-macos-wheels
-          path: dist
-      - uses: actions/download-artifact@v3
-        with:
-          name: sqlite-jsonschema-macos-arm-wheels
-          path: dist
-      - uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          skip_existing: true
   upload-npm:
     needs:
       [
-        build-ubuntu-python,
-        build-macos-python,
-        build-macos-arm-python,
-        build-windows-python,
+        build-macos-extension,
+        build-macos-arm-extension,
+        build-ubuntu-extension,
+        build-windows-extension,
       ]
     runs-on: ubuntu-latest
     steps:
@@ -258,3 +228,33 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+  upload-pypi:
+    needs:
+      [
+        build-ubuntu-python,
+        build-macos-python,
+        build-macos-arm-python,
+        build-windows-python,
+      ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          name: sqlite-jsonschema-windows-wheels
+          path: dist
+      - uses: actions/download-artifact@v3
+        with:
+          name: sqlite-jsonschema-ubuntu-wheels
+          path: dist
+      - uses: actions/download-artifact@v3
+        with:
+          name: sqlite-jsonschema-macos-wheels
+          path: dist
+      - uses: actions/download-artifact@v3
+        with:
+          name: sqlite-jsonschema-macos-arm-wheels
+          path: dist
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          skip_existing: true

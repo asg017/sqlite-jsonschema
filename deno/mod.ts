@@ -1,7 +1,7 @@
 import { download } from "https://deno.land/x/plug@1.0.1/mod.ts";
 import meta from "./deno.json" assert { type: "json" };
 
-const BASE = `${meta.github}/releases/download/${meta.version}`;
+const BASE = `${meta.github}/releases/download/v${meta.version}`;
 
 // Similar to https://github.com/denodrivers/sqlite3/blob/f7529897720631c2341b713f0d78d4d668593ea9/src/ffi.ts#L561
 let path: string;
