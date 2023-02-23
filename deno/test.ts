@@ -8,7 +8,7 @@ Deno.test("x/sqlite3", (t) => {
   const db = new Database(":memory:");
 
   db.enableLoadExtension = true;
-  db.loadExtension(sqlite_jsonschema.getLoadablePath());
+  sqlite_jsonschema.load(db);
 
   const [version] = db
     .prepare("select jsonschema_version()")

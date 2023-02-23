@@ -41,8 +41,26 @@ try {
 }
 
 /**
- * Returns the full path to the compiled sqlite-jsonschema extension. Meant to be passed into `loadExtension()` in `x/sqlite3`.
+ * Returns the full path to the compiled sqlite-jsonschema extension.
+ * Caution: this will not be named "jsonschem0.dylib|so|dll", since plug will
+ * replace the name with a hash.
  */
 export function getLoadablePath(): string {
   return path;
+}
+
+/**
+ * Entrypoint name for the sqlite-jsonschema extension.
+ */
+export const entrypoint = "sqlite3_jsonschema_init";
+
+interface Db {
+  // after https://deno.land/x/sqlite3@0.8.0/mod.ts?s=Database#method_loadExtension_0
+  loadExtension(file: string, entrypoint?: string | undefined): void;
+}
+/**
+ * Loads the sqlite-jsonschema extension on the given sqlite3 database.
+ */
+export function load(db: Db): void {
+  db.loadExtension(path, entrypoint);
 }
