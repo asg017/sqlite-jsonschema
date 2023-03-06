@@ -8,7 +8,7 @@ import sql from "./_sql.ts";
 const site = lume(
   {
     prettyUrls: false,
-    //location: new URL("https://alexgarcia.xyz/sqlite-jsonschema"),
+    location: new URL("https://alexgarcia.xyz/sqlite-jsonschema"),
   },
   {
     markdown: {
