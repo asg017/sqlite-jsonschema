@@ -1,0 +1,181 @@
+main {
+  min-width: 0;
+}
+main > aside nav {
+  width: 100%;
+  padding-bottom: var(--block-spacing-vertical);
+}
+main > aside nav.closed-on-mobile details {
+  display: none;
+}
+@media (min-width: 992px) {
+  body > main {
+    --block-spacing-horizontal: calc(var(--spacing) * 1.75);
+    grid-column-gap: calc(var(--block-spacing-horizontal) * 3);
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+  main > aside nav {
+    position: fixed;
+    width: 280px;
+    max-height: calc(100vh - 5.5rem);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  main > aside nav.closed-on-mobile details {
+    display: block;
+  }
+}
+
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --primary: #b45ea4;
+    --primary-hover: #d0abcf;
+    --primary-focus: rgba(180, 94, 164, 0.25);
+    --primary-inverse: #fff;
+  }
+}
+
+h1,
+h2,
+p {
+  --typography-spacing-vertical: 1.25rem;
+}
+
+pre code {
+  font-size: 0.9rem;
+}
+
+/* hljs stuff */
+
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em;
+}
+code.hljs {
+  padding: 3px 5px;
+}
+
+/*
+  Adapted from "an old hope" 
+  https://github.com/highlightjs/highlight.js/blob/86dcb210227ef130a00b5ece50605ea1ec887be8/src/styles/an-old-hope.css#L7
+*/
+
+:root {
+  --color-death-star: #b6b18b;
+  --color-vader: #eb3c54;
+  --color-c3po: #e7ce56;
+  --color-skywalker: #ee7c2b;
+  --color-kenobi: #4fb4d7;
+  --color-yoda: #78bb65;
+  --color-windu: #b45ea4;
+
+  --hljs-background: #1c1d21;
+  --hljs-color: #c0c5ce;
+
+  --code-dotcommand: var(--color-skywalker);
+  --code-variable: var(--color-kenobi);
+  --code-keyword: var(--color-windu);
+  --code-number: var(--color-c3po);
+  --code-type: var(--color-skywalker);
+  --code-builtin: var(--color-c3po);
+  --code-string: var(--color-kenobi);
+  --code-comment: var(--color-yoda);
+  --code-prompt: #7c7c7c;
+}
+
+code {
+  --code-color: #cecece;
+}
+
+a,
+a code {
+  color: var(--color-kenobi);
+}
+
+.hljs {
+  background: var(--hljs-background);
+  color: var(--hljs-color);
+}
+.hljs-prompt {
+  color: var(--code-prompt);
+  font-style: italic;
+  user-select: none;
+}
+
+.hljs-dotcommand {
+  color: var(--code-dotcommand);
+}
+.hljs-variable {
+  color: var(--code-variable);
+}
+.hljs-number {
+  color: var(--code-number);
+}
+
+.hljs-built_in {
+  color: var(--code-builtin);
+}
+
+.hljs-string {
+  color: var(--code-string);
+}
+.hljs-comment {
+  color: var(--code-comment);
+}
+.hljs-keyword {
+  color: var(--code-keyword);
+}
+
+.hljs-type {
+  color: var(--code-type);
+}
+
+.hljs-quote {
+  color: var(--color-death-star);
+}
+
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+  color: var(--color-vader);
+}
+
+.hljs-literal,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+  color: var(--color-c3po);
+}
+
+.hljs-attribute {
+  color: var(--color-skywalker);
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+  color: var(--color-kenobi);
+}
+
+.hljs-title,
+.hljs-section {
+  color: var(--color-yoda);
+}
+
+.hljs-selector-tag {
+  color: var(--code-keyword);
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

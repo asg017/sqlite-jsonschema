@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="description"
+      content="sqlite-jsonschema is a SQLite extensions that allows you to validate JSON documents with JSON Schema in SQLite.">
+    <meta name="viewport" content="width=device-width">
+    <title>
+      {{yo}}
+      {% if title %}
+      {{ title }} - {{ project }}
+      {% else %}
+      {{ project }} - A SQLite extension for JSON Schema Validation 
+      {% endif %}
+    </title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M61.5 32C61.5 48.2924 48.2924 61.5 32 61.5C15.7076 61.5 2.5 48.2924 2.5 32C2.5 15.7076 15.7076 2.5 32 2.5C48.2924 2.5 61.5 15.7076 61.5 32Z' fill='%23B45EA4' stroke='white' stroke-width='5'/%3E%3C/svg%3E"/>
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css"/>
+    <link
+      rel="stylesheet"
+      href="{{ '/static/style.css' | url }}"
+    />
+  </head>
+  <body>
+    <main class="container">
+      {% include "navbar.njk" %}
+      <div role="document">
+        {{ content | safe }}
+      </div>
+    </main>
+  </body>
+  <script type="module" src="{{ '/static/script.js' | url }}"></script>  
+</html>

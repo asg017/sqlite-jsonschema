@@ -117,6 +117,12 @@ version:
 	make npm
 	make deno
 
+site-serve:
+	watchexec -w site/_config.ts -w site/_sql.ts -- deno task -c site/deno.json serve
+
+site-build:
+	deno task -c site/deno.json build
+
 format:
 	cargo fmt
 
@@ -163,4 +169,5 @@ test:
 	static static-release \
 	debug release \
 	format version \
-	deno npm
+	deno npm \
+	site-serve site-build
