@@ -26,16 +26,16 @@
         {% for page in search.pages("url^=/" + section.id, "order title") %}
           <li>
             {% if page.data.url == url %}
-            <a href="{{ page.data.url }}" aria-current="page" title="{{ page.data.description }}">{{ page.data.title | md(true) }}</a>
+            <a href="{{ page.data.url | url }}" aria-current="page" title="{{ page.data.description }}">{{ page.data.title | md(true) }}</a>
             {% else %}
-            <a href="{{ page.data.url }}" title="{{ page.data.description }}">{{ page.data.title | md(true) }}</a>
+            <a href="{{ page.data.url | url }}" title="{{ page.data.description }}">{{ page.data.title | md(true) }}</a>
             {% endif %}
           </li>
         {% endfor %}
       </ul>  
     </details>
     {% else %}
-      <div class="x"> <a href="{{ search.page("url^=/" + section.id).data.url }}">{{section.title}}</a></div>
+      <div class="x"> <a href="{{ search.page("url^=/" + section.id).data.url | url }}">{{section.title}}</a></div>
     {% endif %}
     
     {% endfor %}
