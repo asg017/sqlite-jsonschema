@@ -32,7 +32,8 @@ select jsonschema_matches(
 Returns the semver version string of the current version of `sqlite-jsonschema`.
 
 ```sql
-select jsonschema_version(); -- 'v0.2.1'
+select jsonschema_version();
+'v0.2.1'
 ```
 
 <h3 id="jsonschema_debug"><a href="#jsonschema_debug">#</a><code>jsonschema_debug()</code></h3>
@@ -42,9 +43,7 @@ the version string, build date, and commit hash.
 
 ```sql
 select jsonschema_debug();
-/*
 'Version: v0.2.1
 Source: 52adccb319fb4f89f04d6ea696fedef3db198ed8
 '
-*/
 ```

@@ -37,8 +37,12 @@
     {% else %}
       <div class="x"> <a href="{{ search.page("url^=/" + section.id).data.url | url }}">{{section.title}}</a></div>
     {% endif %}
-    
     {% endfor %}
+    <div style="font-size: .8rem; text-align: right;">
+      <code>
+        <a href="https://github.com/asg017/sqlite-jsonschema/commit/{{SOURCE_ID}}">{{SOURCE_ID_SHORT}}</a>
+      </code>
+    </div>
   </nav>
   <style>
   .x {

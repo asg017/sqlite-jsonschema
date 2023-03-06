@@ -20,6 +20,16 @@ const site = lume(
 
 site.data("VERSION", "v" + Deno.readTextFileSync("../VERSION"));
 site.data("project", "sqlite-jsonschema");
+const SOURCE_ID = new TextDecoder().decode(
+  await Deno.run({
+    cmd: ["git", "rev-parse", "HEAD"],
+    stdout: "piped",
+  }).output()
+);
+
+site.data("SOURCE_ID", SOURCE_ID);
+site.data("SOURCE_ID_SHORT", SOURCE_ID.substring(0, 7));
+site.data("BUILD_DATE", new Date().toISOString());
 
 site.use(
   codeHighlight({

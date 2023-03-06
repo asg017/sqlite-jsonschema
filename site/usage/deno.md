@@ -1,6 +1,6 @@
 ---
 title: Deno
-order: 5
+order: 3
 ---
 
 # `x/sqlite_jsonschema` Deno Module

@@ -121,6 +121,7 @@ site-serve:
 	watchexec -w site/_config.ts -w site/_sql.ts -- deno task -c site/deno.json serve
 
 site-build:
+	scripts/site_generate.sh
 	deno task -c site/deno.json build
 
 format:

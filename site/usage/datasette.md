@@ -1,6 +1,6 @@
 ---
 title: Datasette
-order: 3
+order: 5
 ---
 
 # The `datasette-sqlite-jsonschema` Datasette Plugin

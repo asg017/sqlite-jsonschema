@@ -1,6 +1,6 @@
 ---
 title: Python
-order: 2
+order: 1
 ---
 
 # The `sqlite-jsonschema` Python package
