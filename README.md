@@ -72,7 +72,7 @@ where not valid;
 
 ## Installing
 
-`sqlite-jsonschema` is distributed on pip, npm, and deno.land/x for Python, Node.js, and Deno programmers. There are also pre-built extensions available for use in other environments.
+`sqlite-jsonschema` is distributed on pip, npm, and https://deno.land/x for Python, Node.js, and Deno programmers. There are also pre-built extensions available for use in other environments.
 
 ### Python
 
@@ -143,7 +143,7 @@ See [_Using `sqlite-jsonschema` with Deno_](https://alexgarcia.xyz/sqlite-jsonsc
 
 ### Datasette
 
-For [Datasette](https://datasette.io/), use the [`datasette-sqlite-ulid` Datasette plugin](https://datasette.io/plugins/datasette-sqlite-ulid) to include `sqlite-jsonschema` functions to your Datasette instances.
+For [Datasette](https://datasette.io/), use the [`datasette-sqlite-ulid` plugin](https://datasette.io/plugins/datasette-sqlite-ulid) to include `sqlite-jsonschema` functions to your Datasette instances.
 
 ```
 datasette install datasette-sqlite-ulid
@@ -153,7 +153,7 @@ See [_Using `sqlite-jsonschema` with Datasette_](https://alexgarcia.xyz/sqlite-j
 
 ### `sqlite3` CLI
 
-For [the `sqlite3` CLI](https://sqlite.org/cli.html), either [download a pre-compiled extension from the Releases page](https://github.com/asg017/sqlite-jsonschema/releases) or [build it yourself](#building-from-source).
+For [the `sqlite3` CLI](https://sqlite.org/cli.html), either [download a pre-compiled extension from the Releases page](https://github.com/asg017/sqlite-jsonschema/releases) or [build it yourself](#building-from-source). Then use the [`.load` dot command](https://sqlite.org/cli.html#loading_extensions).
 
 ```sql
 .load ./jsonschema0
@@ -163,12 +163,12 @@ select jsonschema_version();
 
 ### As a loadable extension
 
-If you're using `sqlite-jsonschema` in a different environment, then [download a pre-compiled extension from the Releases page](https://github.com/asg017/sqlite-jsonschema/releases) and load it into your environment. Chances are there is some method called `"loadExtension"` or `"load_extension"` in the SQLite client library you are using. Alternatively, as a last resort, use [the `load_extension()` SQL function](https://www.sqlite.org/lang_corefunc.html#load_extension).
-
-Download the `jsonschema0.dylib` (for MacOS), `jsonschema0.so` (Linux), or `jsonschema0.dll` (Windows) file from a release and load it into your SQLite environment.
+If you're using `sqlite-jsonschema` in a different way from those listed above, then [download a pre-compiled extension from the Releases page](https://github.com/asg017/sqlite-jsonschema/releases) and load it into your environment. Download the `jsonschema0.dylib` (for MacOS), `jsonschema0.so` (Linux), or `jsonschema0.dll` (Windows) file from a release and load it into your SQLite environment.
 
 > **Note:**
 > The `0` in the filename (`jsonschema0.dylib`/ `jsonschema0.so`/`jsonschema0.dll`) denotes the major version of `sqlite-jsonschema`. Currently `sqlite-jsonschema` is pre v1, so expect breaking changes in future versions.
+
+Chances are there is some method called "loadExtension" or "load_extension" in the SQLite client library you are using. Alternatively, as a last resort, use [the `load_extension()` SQL function](https://www.sqlite.org/lang_corefunc.html#load_extension).
 
 ### Building from source
 
@@ -180,7 +180,7 @@ cd sqlite-jsonschema
 make loadable-release
 ```
 
-Once complete, your compiled extension will appear under `dist/release/`, either as `jsonschema0.so`, `jsonschema0.dylib`, or `jsonschema0.dll` depending on your operating system.
+Once complete, your compiled extension will appear under `dist/release/`, either as `jsonschema0.so`, `jsonschema0.dylib`, or `jsonschema0.dll`, depending on your operating system.
 
 ## Documentation
 

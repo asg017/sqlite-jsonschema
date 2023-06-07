@@ -39,7 +39,7 @@ ifdef target
 CARGO_TARGET=--target=$(target)
 BUILT_LOCATION=target/$(target)/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
 BUILT_LOCATION_RELEASE=target/$(target)/release/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
-else 
+else
 CARGO_TARGET=
 BUILT_LOCATION=target/debug/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
 BUILT_LOCATION_RELEASE=target/release/$(LIBRARY_PREFIX)sqlite_jsonschema.$(LOADABLE_EXTENSION)
@@ -76,13 +76,13 @@ $(TARGET_LOADABLE_RELEASE): $(prefix) $(shell find . -type f -name '*.rs')
 	cp $(BUILT_LOCATION_RELEASE) $@
 
 python: $(TARGET_WHEELS) $(TARGET_LOADABLE) python/sqlite_jsonschema/setup.py python/sqlite_jsonschema/sqlite_jsonschema/__init__.py .github/workflows/rename-wheels.py
-	cp $(TARGET_LOADABLE) $(INTERMEDIATE_PYPACKAGE_EXTENSION) 
+	cp $(TARGET_LOADABLE) $(INTERMEDIATE_PYPACKAGE_EXTENSION)
 	rm $(TARGET_WHEELS)/sqlite_jsonschema* || true
 	pip3 wheel python/sqlite_jsonschema/ -w $(TARGET_WHEELS)
 	python3 .github/workflows/rename-wheels.py $(TARGET_WHEELS) $(RENAME_WHEELS_ARGS)
 
 python-release: $(TARGET_LOADABLE_RELEASE) $(TARGET_WHEELS_RELEASE) python/sqlite_jsonschema/setup.py python/sqlite_jsonschema/sqlite_jsonschema/__init__.py .github/workflows/rename-wheels.py
-	cp $(TARGET_LOADABLE_RELEASE)  $(INTERMEDIATE_PYPACKAGE_EXTENSION) 
+	cp $(TARGET_LOADABLE_RELEASE)  $(INTERMEDIATE_PYPACKAGE_EXTENSION)
 	rm $(TARGET_WHEELS_RELEASE)/sqlite_jsonschema* || true
 	pip3 wheel python/sqlite_jsonschema/ -w $(TARGET_WHEELS_RELEASE)
 	python3 .github/workflows/rename-wheels.py $(TARGET_WHEELS_RELEASE) $(RENAME_WHEELS_ARGS)
@@ -116,9 +116,6 @@ version:
 	make python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py
 	make npm
 	make deno
-
-site-serve:
-	watchexec -w site/_config.ts -w site/_sql.ts -- deno task -c site/deno.json serve
 
 site-build:
 	scripts/site_generate.sh
@@ -161,9 +158,10 @@ test:
 	make test-loadable
 	make test-python
 	make test-npm
+	make test-deno
 
 .PHONY: clean \
-	test test-loadable test-python \
+	test test-loadable test-python test-npm \
 	loadable loadable-release \
 	python python-release \
 	datasette datasette-release \
