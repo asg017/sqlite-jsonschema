@@ -72,6 +72,21 @@ where not valid;
 
 ## Installing
 
+| Language       | Install                                                                  |                                                                                                                                                                                                         |
+| -------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Python         | `pip install sqlite-jsonschema`                                          | [![PyPI](https://img.shields.io/pypi/v/sqlite-jsonschema.svg?color=blue&logo=python&logoColor=white)](https://pypi.org/project/sqlite-jsonschema/)                                                      |
+| Datasette      | `datasette install datasette-sqlite-jsonschema`                          | [![Datasette](https://img.shields.io/pypi/v/datasette-sqlite-jsonschema.svg?color=B6B6D9&label=Datasette+plugin&logoColor=white&logo=python)](https://datasette.io/plugins/datasette-sqlite-jsonschema) |
+| Node.js        | `npm install sqlite-jsonschema`                                          | [![npm](https://img.shields.io/npm/v/sqlite-jsonschema.svg?color=green&logo=nodedotjs&logoColor=white)](https://www.npmjs.com/package/sqlite-jsonschema)                                                |
+| Deno           | [`deno.land/x/sqlite_jsonschema`](https://deno.land/x/sqlite_jsonschema) | [![deno.land/x release](https://img.shields.io/github/v/release/asg017/sqlite-jsonschema?color=fef8d2&include_prereleases&label=deno.land%2Fx&logo=deno)](https://deno.land/x/sqlite_jsonschema)        |
+| Ruby           | `gem install sqlite-jsonschema`                                          | ![Gem](https://img.shields.io/gem/v/sqlite-jsonschema?color=red&logo=rubygems&logoColor=white)                                                                                                          |
+| Github Release |                                                                          | ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/asg017/sqlite-jsonschema?color=lightgrey&include_prereleases&label=Github+release&logo=github)                            |
+
+<!--
+| Elixir         | [`hex.pm/packages/sqlite_jsonschema`](https://hex.pm/packages/sqlite_jsonschema) | [![Hex.pm](https://img.shields.io/hexpm/v/sqlite_jsonschema?color=purple&logo=elixir)](https://hex.pm/packages/sqlite_jsonschema)                                                                       |
+| Go             | `go get -u github.com/asg017/sqlite-jsonschema/bindings/go`               | [![Go Reference](https://pkg.go.dev/badge/github.com/asg017/sqlite-jsonschema/bindings/go.svg)](https://pkg.go.dev/github.com/asg017/sqlite-jsonschema/bindings/go)                                     |
+| Rust           | `cargo add sqlite-jsonschema`                                             | [![Crates.io](https://img.shields.io/crates/v/sqlite-jsonschema?logo=rust)](https://crates.io/crates/sqlite-jsonschema)                                                                                 |
+-->
+
 `sqlite-jsonschema` is distributed on pip, npm, and https://deno.land/x for Python, Node.js, and Deno programmers. There are also pre-built extensions available for use in other environments.
 
 ### Python
@@ -93,7 +108,7 @@ sqlite_jsonschema.load(db)
 db.execute('select jsonschema_version(), jsonschema()').fetchone()
 ```
 
-See [_Using `sqlite-jsonschema` with Python_](https://alexgarcia.xyz/sqlite-jsonschema/usage/python.html) for details.
+See [_Using `sqlite-jsonschema` with Python_](https://alexgarcia.jsonschema/sqlite-jsonschema/usage/python.html) for details.
 
 ### Node.js
 
@@ -117,7 +132,7 @@ const version = db.prepare("select jsonschema_version()").pluck().get();
 console.log(version); // "v0.2.0"
 ```
 
-See [_Using `sqlite-jsonschema` with Node.js_](https://alexgarcia.xyz/sqlite-jsonschema/usage/node.html) for details.
+See [_Using `sqlite-jsonschema` with Node.js_](https://alexgarcia.jsonschema/sqlite-jsonschema/usage/node.html) for details.
 
 ### Deno
 
@@ -139,7 +154,7 @@ const [version] = db
 console.log(version);
 ```
 
-See [_Using `sqlite-jsonschema` with Deno_](https://alexgarcia.xyz/sqlite-jsonschema/usage/deno.html) for details.
+See [_Using `sqlite-jsonschema` with Deno_](https://alexgarcia.jsonschema/sqlite-jsonschema/usage/deno.html) for details.
 
 ### Datasette
 
@@ -149,7 +164,7 @@ For [Datasette](https://datasette.io/), use the [`datasette-sqlite-ulid` plugin]
 datasette install datasette-sqlite-ulid
 ```
 
-See [_Using `sqlite-jsonschema` with Datasette_](https://alexgarcia.xyz/sqlite-jsonschema/usage/datasette.html) for details.
+See [_Using `sqlite-jsonschema` with Datasette_](https://alexgarcia.jsonschema/sqlite-jsonschema/usage/datasette.html) for details.
 
 ### `sqlite3` CLI
 
@@ -184,11 +199,11 @@ Once complete, your compiled extension will appear under `dist/release/`, either
 
 ## Documentation
 
-See [the full API Reference](https://alexgarcia.xyz/sqlite-jsonschema/reference.html) for every `sqlite-jsonschema` SQL function.
+See [the full API Reference](https://alexgarcia.jsonschema/sqlite-jsonschema/reference.html) for every `sqlite-jsonschema` SQL function.
 
 ## Supporting
 
-I (Alex 👋🏼) spent a lot of time and energy on this project and [many other open source projects](https://github.com/asg017?tab=repositories&q=&type=&language=&sort=stargazers). If your company or organization uses this library (or you're feeling generous), then please [consider supporting my work](https://alexgarcia.xyz/work.html), or share this project with a friend!
+I (Alex 👋🏼) spent a lot of time and energy on this project and [many other open source projects](https://github.com/asg017?tab=repositories&q=&type=&language=&sort=stargazers). If your company or organization uses this library (or you're feeling generous), then please [consider supporting my work](https://alexgarcia.jsonschema/work.html), or share this project with a friend!
 
 ## See also
 
