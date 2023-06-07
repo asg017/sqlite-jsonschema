@@ -11,12 +11,12 @@ In order to
 git clone https://github.com/asg017/sqlite-jsonschema TODO
 ```
 
-```
+```bash
 cd sqlite-jsonschema
 make loadable-release
 ```
 
-```
+```bash
 ls dist/release
 ```
 

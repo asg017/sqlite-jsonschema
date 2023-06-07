@@ -1,3 +1,45 @@
+header {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  padding: 0 !important;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  background-color: white;
+  border-bottom: 2px solid #dadada;
+}
+header .header-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0 auto;
+  align-items: center;
+}
+header .header-title {
+  display: flex;
+  gap: 1rem;
+}
+header .header-links {
+  display: flex;
+  padding-right: 2rem;
+}
+.title {
+  height: 4rem;
+  margin-bottom: 2rem;
+  font-size: 1.3rem;
+}
+.title code {
+  padding: 0.2rem;
+}
+.title-name code {
+  color: var(--primary);
+}
+.title-version {
+  font-size: 0.8rem;
+  color: white;
+  color: #2c2c2c;
+}
+
 main {
   min-width: 0;
 }
@@ -46,6 +88,18 @@ pre code {
   font-size: 0.9rem;
 }
 
+p,
+pre,
+code,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  cursor: auto;
+}
+
 /* hljs stuff */
 
 pre code.hljs {
@@ -87,6 +141,7 @@ code.hljs {
 
 code {
   --code-color: #cecece;
+  --code-color: #2c2c2c;
 }
 
 a,

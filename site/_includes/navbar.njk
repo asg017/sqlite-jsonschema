@@ -1,21 +1,5 @@
 <aside>
-  <nav class="closed-on-mobile">
-    <div class="title">
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <div>
-          <a class="title-name" href="{{ '/' | url }}"><code>sqlite-jsonschema</code></a>
-        </div>
-        <div>
-          <a href="https://github.com/asg017/sqlite-jsonschema">
-            <img width="24px" height="24px" alt="Github logo" src="{{ '/static/github-mark-white.svg' | url }}"/>
-          </a>
-        </div>
-      </div>
-      <a href="https://github.com/asg017/sqlite-jsonschema/releases/tag/{{ VERSION }}">
-        <code class="title-version">{{ VERSION }}</code>
-      </a>
-    </div>
-    
+  <nav class="closed-on-mobile">    
     {% for section in sidebar_menu %}
     {% if section.nested %}
       <details class="sidebar-navbar-section" open>
@@ -50,21 +34,6 @@
     padding-bottom: var(--spacing);
     border-bottom: var(--border-width) solid var(--accordion-border-color);
   }
-  .title {
-    height: 4rem;
-    margin-bottom: 2rem;
-    font-size: 1.3rem;
-  }
-  .title code {
-    padding: .2rem;
-  }
-  .title-name code {
-    color: var(--primary);
-  }
-  .title-version {
-    font-size: .8rem;
-    color: white;
-  }
   .sidebar-navbarx {
     padding-top: 6rem;
     border-right: 1px solid #cecece;
@@ -76,9 +45,11 @@
   .sidebar-navbar-section-title {
     color: #ececec;
     font-weight: 600;
+    color: #2c2c2c;
   }
   aside a {
     color: #ececec;
+    color: #2c2c2c;
   }
   [role=link]:is([aria-current],:hover,:active,:focus), a:is([aria-current],:hover,:active,:focus) {
     color: var(--primary);

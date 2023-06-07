@@ -22,6 +22,26 @@
     />
   </head>
   <body>
+    <header>
+      <div class="header-container">
+        <div class="header-title">
+          <div>
+            <a class="title-name" href="{{ '/' | url }}"><code>sqlite-jsonschema</code></a>
+          </div>
+          <a href="https://github.com/asg017/sqlite-jsonschema/releases/tag/{{ VERSION }}">
+            <code class="title-version">{{ VERSION }}</code>
+          </a>
+        </div>
+
+        <div class="header-links">
+          <a href="https://github.com/asg017/sqlite-jsonschema">
+            Github
+          </a>
+        </div>
+        
+      </div>
+    </header>
+
     <main class="container">
       {% include "navbar.njk" %}
       <div role="document">

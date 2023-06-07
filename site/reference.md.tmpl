@@ -19,12 +19,14 @@ Returns `1` if the given `document` matches the given `schema`, where `schema` i
 select jsonschema_matches(
   '{"maxLength": 5}',
   json_quote('alex')
-); -- 1
+);
+1
 
 select jsonschema_matches(
   '{"maxLength": 5}',
   json_quote('alexxx')
-); -- 0
+);
+0
 ```
 
 <h3 id="jsonschema_version"><a href="#jsonschema_version">#</a><code>jsonschema_version()</code></h3>
