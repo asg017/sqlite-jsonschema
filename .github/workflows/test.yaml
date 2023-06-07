@@ -18,8 +18,7 @@ jobs:
       - name: Setup Deno environment
         uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
-
+          deno-version: v1.30
       - name: Build site
         run: make site-build
       - name: Setup Pages
@@ -105,7 +104,7 @@ jobs:
       # for test-deno
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: v1.30
       - name: Cache Deno dependencies
         uses: actions/cache@v3
         with:
@@ -314,7 +313,7 @@ jobs:
       # for test-deno
       - uses: denoland/setup-deno@v1
         with:
-          deno-version: v1.x
+          deno-version: v1.30
       - name: Cache Deno dependencies
         uses: actions/cache@v3
         with:
