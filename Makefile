@@ -110,12 +110,18 @@ python/sqlite_jsonschema/sqlite_jsonschema/version.py: VERSION
 python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py: VERSION
 	printf '__version__ = "%s"\n__version_info__ = tuple(__version__.split("."))\n' `cat VERSION` > $@
 
+bindings/ruby/lib/version.rb: bindings/ruby/lib/version.rb.tmpl VERSION
+	VERSION=$(VERSION) envsubst < $< > $@
+
+ruby: bindings/ruby/lib/version.rb
+
 version:
 	make Cargo.toml
 	make python/sqlite_jsonschema/sqlite_jsonschema/version.py
 	make python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py
 	make npm
 	make deno
+	make ruby
 
 site-build:
 	scripts/site_generate.sh
@@ -160,6 +166,9 @@ test:
 	make test-npm
 	make test-deno
 
+publish-release:
+	./scripts/publish_release.sh
+
 .PHONY: clean \
 	test test-loadable test-python test-npm \
 	loadable loadable-release \
@@ -167,6 +176,6 @@ test:
 	datasette datasette-release \
 	static static-release \
 	debug release \
-	format version \
-	deno npm \
+	format version publish-release \
+	deno npm ruby \
 	site-serve site-build
