@@ -1,4 +1,4 @@
 # automatically generated, do not edit by hand.
 module SqliteJsonschema
-  VERSION = "0.2.3-alpha.5"
+  VERSION = "0.2.3-alpha.6"
 end
