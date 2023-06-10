@@ -80,11 +80,11 @@ where not valid;
 | Deno           | [`deno.land/x/sqlite_jsonschema`](https://deno.land/x/sqlite_jsonschema) | [![deno.land/x release](https://img.shields.io/github/v/release/asg017/sqlite-jsonschema?color=fef8d2&include_prereleases&label=deno.land%2Fx&logo=deno)](https://deno.land/x/sqlite_jsonschema)        |
 | Ruby           | `gem install sqlite-jsonschema`                                          | ![Gem](https://img.shields.io/gem/v/sqlite-jsonschema?color=red&logo=rubygems&logoColor=white)                                                                                                          |
 | Github Release |                                                                          | ![GitHub tag (latest SemVer pre-release)](https://img.shields.io/github/v/tag/asg017/sqlite-jsonschema?color=lightgrey&include_prereleases&label=Github+release&logo=github)                            |
+| Rust           | `cargo add sqlite-jsonschema`                                            | [![Crates.io](https://img.shields.io/crates/v/sqlite-jsonschema?logo=rust)](https://crates.io/crates/sqlite-jsonschema)                                                                                 |
 
 <!--
 | Elixir         | [`hex.pm/packages/sqlite_jsonschema`](https://hex.pm/packages/sqlite_jsonschema) | [![Hex.pm](https://img.shields.io/hexpm/v/sqlite_jsonschema?color=purple&logo=elixir)](https://hex.pm/packages/sqlite_jsonschema)                                                                       |
 | Go             | `go get -u github.com/asg017/sqlite-jsonschema/bindings/go`               | [![Go Reference](https://pkg.go.dev/badge/github.com/asg017/sqlite-jsonschema/bindings/go.svg)](https://pkg.go.dev/github.com/asg017/sqlite-jsonschema/bindings/go)                                     |
-| Rust           | `cargo add sqlite-jsonschema`                                             | [![Crates.io](https://img.shields.io/crates/v/sqlite-jsonschema?logo=rust)](https://crates.io/crates/sqlite-jsonschema)                                                                                 |
 -->
 
 `sqlite-jsonschema` is distributed on pip, npm, and https://deno.land/x for Python, Node.js, and Deno programmers. There are also pre-built extensions available for use in other environments.
