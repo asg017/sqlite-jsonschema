@@ -3,13 +3,13 @@
 # `x/sqlite_jsonschema` Deno Module
 
 [![Tags](https://img.shields.io/github/release/asg017/sqlite-jsonschema)](https://github.com/asg017/sqlite-jsonschema/releases)
-[![Doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/sqlite-jsonschema@0.2.3-alpha.7/mod.ts)
+[![Doc](https://doc.deno.land/badge.svg)](https://doc.deno.land/https/deno.land/x/sqlite-jsonschema@0.2.3/mod.ts)
 
 The [`sqlite-jsonschema`](https://github.com/asg017/sqlite-jsonschema) SQLite extension is available to Deno developers with the [`x/sqlite_jsonschema`](https://deno.land/x/sqlite-jsonschema) Deno module. It works with [`x/sqlite3`](https://deno.land/x/sqlite3), the fastest and native Deno SQLite3 module.
 
 ```js
 import { Database } from "https://deno.land/x/sqlite3@0.8.0/mod.ts";
-import * as sqlite_jsonschema from "https://deno.land/x/sqlite_jsonschema@v0.2.3-alpha.7/mod.ts";
+import * as sqlite_jsonschema from "https://deno.land/x/sqlite_jsonschema@v0.2.3/mod.ts";
 
 const db = new Database(":memory:");
 
