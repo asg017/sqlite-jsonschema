@@ -1,0 +1,21 @@
+[project]
+name = "sqlite-utils-sqlite-jsonschema"
+version = "0.2.1"
+description = "TODO"
+readme = "README.md"
+authors = [{name = "Alex Garcia"}]
+license = {text = "Apache-2.0"}
+classifiers = []
+
+dependencies = [
+    "sqlite-utils",
+    "sqlite-jsonschema"
+]
+
+[project.urls]
+Homepage = "https://github.com/asg017/sqlite-jsonschema"
+Changelog = "https://github.com/asg017/sqlite-jsonschema/releases"
+Issues = "https://github.com/asg017/sqlite-jsonschema/issues"
+
+[project.entry-points.sqlite_utils]
+sqlite_jsonschema = "sqlite_utils_sqlite_jsonschema"

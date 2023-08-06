@@ -94,7 +94,7 @@ where not valid;
 For Python developers, use the [`sqlite-jsonschema` Python package](https://pypi.org/package/sqlite-jsonschema/):
 
 ```
-pip install sqlite-ulid
+pip install sqlite-jsonschema
 ```
 
 The `sqlite-jsonschema` extension can then be loaded into a [`sqlite3` Connection object](https://docs.python.org/3/library/sqlite3.html#connection-objects).
@@ -158,10 +158,10 @@ See [_Using `sqlite-jsonschema` with Deno_](https://alexgarcia.jsonschema/sqlite
 
 ### Datasette
 
-For [Datasette](https://datasette.io/), use the [`datasette-sqlite-ulid` plugin](https://datasette.io/plugins/datasette-sqlite-ulid) to include `sqlite-jsonschema` functions to your Datasette instances.
+For [Datasette](https://datasette.io/), use the [`datasette-sqlite-jsonschema` plugin](https://datasette.io/plugins/datasette-sqlite-jsonschema) to include `sqlite-jsonschema` functions to your Datasette instances.
 
 ```
-datasette install datasette-sqlite-ulid
+datasette install datasette-sqlite-jsonschema
 ```
 
 See [_Using `sqlite-jsonschema` with Datasette_](https://alexgarcia.jsonschema/sqlite-jsonschema/usage/datasette.html) for details.

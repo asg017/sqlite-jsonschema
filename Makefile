@@ -97,6 +97,20 @@ datasette-release: $(TARGET_WHEELS_RELEASE) python/datasette_sqlite_jsonschema/s
 	rm $(TARGET_WHEELS_RELEASE)/datasette* || true
 	pip3 wheel python/datasette_sqlite_jsonschema/ --no-deps -w $(TARGET_WHEELS_RELEASE)
 
+bindings/sqlite-utils/pyproject.toml: bindings/sqlite-utils/pyproject.toml.tmpl VERSION
+	VERSION=$(VERSION) envsubst < $< > $@
+	echo "✅ generated $@"
+
+bindings/sqlite-utils/sqlite_utils_sqlite_jsonschema/version.py: bindings/sqlite-utils/sqlite_utils_sqlite_jsonschema/version.py.tmpl VERSION
+	VERSION=$(VERSION) envsubst < $< > $@
+	echo "✅ generated $@"
+
+sqlite-utils: $(TARGET_WHEELS) bindings/sqlite-utils/pyproject.toml bindings/sqlite-utils/sqlite_utils_sqlite_jsonschema/version.py
+	python3 -m build bindings/sqlite-utils -w -o $(TARGET_WHEELS)
+
+sqlite-utils-release: $(TARGET_WHEELS) bindings/sqlite-utils/pyproject.toml bindings/sqlite-utils/sqlite_utils_sqlite_jsonschema/version.py
+	python3 -m build bindings/sqlite-utils -w -o $(TARGET_WHEELS_RELEASE)
+
 npm: VERSION npm/platform-package.README.md.tmpl npm/platform-package.package.json.tmpl npm/sqlite-jsonschema/package.json.tmpl scripts/npm_generate_platform_packages.sh
 	scripts/npm_generate_platform_packages.sh
 
@@ -121,6 +135,7 @@ version:
 	make Cargo.toml
 	make python/sqlite_jsonschema/sqlite_jsonschema/version.py
 	make python/datasette_sqlite_jsonschema/datasette_sqlite_jsonschema/version.py
+	make bindings/sqlite-utils/pyproject.toml bindings/sqlite-utils/sqlite_utils_sqlite_jsonschema/version.py
 	make npm
 	make deno
 	make ruby
@@ -176,6 +191,7 @@ publish-release:
 	loadable loadable-release \
 	python python-release \
 	datasette datasette-release \
+	sqlite-utils sqlite-utils-release \
 	static static-release \
 	debug release \
 	format version publish-release \
